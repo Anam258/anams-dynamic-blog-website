@@ -43,10 +43,13 @@ const nextConfig: NextConfig = {
 
     return config;
   },
-  // Set a custom memory limit for builds
+  // Environment variables for Netlify deployment
   env: {
     NODE_OPTIONS: "--max-old-space-size=4096",
   },
+  // Add Netlify-specific build settings
+  target: "serverless", // Ensure compatibility with Netlify's serverless environment
+  trailingSlash: true, // Add trailing slashes for Netlify routing consistency
 };
 
 export default nextConfig;
