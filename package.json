@@ -2,6 +2,7 @@
   "name": "dynamic-blog-website",
   "version": "0.1.0",
   "private": true,
+  "sideEffects": false,
   "scripts": {
     "postinstall": "npm install --legacy-peer-deps",
     "build": "next build",
