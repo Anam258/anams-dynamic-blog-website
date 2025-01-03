@@ -37,8 +37,10 @@ const SlugPage = async ({ params: { slug } }: Props) => {
   const query = groq`*[_type == 'post' && slug.current == $slug][0]{
         ...,
         body,
-        author->
+        author-> 
     }`;
+
+  // Fetch the post data asynchronously
   const post: Post = await client.fetch(query, { slug });
 
   return (
@@ -46,7 +48,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
       <div className="flex items-center mb-10">
         <div className="w-full md:w-2/3">
           <Image
-            src={urlFor(post?.mainImage).url()}
+            src={urlFor(post?.mainImage)?.url() || "/fallback-image.jpg"}
             width={500}
             height={500}
             alt="main image"
@@ -55,7 +57,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
         </div>
         <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4">
           <Image
-            src={urlFor(post?.author?.image).url()}
+            src={urlFor(post?.author?.image)?.url() || "/fallback-image.jpg"}
             width={200}
             height={200}
             alt="author image"
