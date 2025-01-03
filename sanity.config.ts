@@ -9,8 +9,8 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 
 export default defineConfig({
   basePath: "/studio",
-  name: "AnamsBlog_Studio",
-  title: "AnamsBlog Studio",
+  name: "Bloggers_Studio",
+  title: "Bloggers Studio",
   projectId,
   dataset,
   plugins: [deskTool(), visionTool()],
