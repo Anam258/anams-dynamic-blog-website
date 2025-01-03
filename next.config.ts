@@ -2,7 +2,6 @@ import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Allow images from Sanity's CDN
     remotePatterns: [
       {
         protocol: "https",
@@ -12,44 +11,34 @@ const nextConfig: NextConfig = {
     ],
   },
   eslint: {
-    // Ignore ESLint errors during build to avoid build failures
     ignoreDuringBuilds: true,
   },
   experimental: {
-    // Optimize build performance for low-resource environments
     workerThreads: true,
-    cpus: 1, // Limit CPU usage to 1 core for stability
+    cpus: 1,
   },
   typescript: {
-    // Ignore TypeScript errors during the build to prevent failures
     ignoreBuildErrors: true,
   },
-  poweredByHeader: false, // Remove the X-Powered-By header for better security
-  reactStrictMode: true, // Enable React's strict mode for development
-  output: "standalone", // Produce optimized standalone output
-  compress: true, // Enable compression for faster page loads
+  poweredByHeader: false,
+  reactStrictMode: true,
+  output: "standalone", // For optimized deployment output
+  compress: true,
   webpack: (config) => {
-    // Optimize Webpack configuration
     config.optimization = {
       ...config.optimization,
-      minimize: true, // Minimize the output
+      minimize: true,
       splitChunks: {
-        chunks: "all", // Optimize all chunks
+        chunks: "all",
       },
     };
-
-    // Fix memory issues by limiting parallelism
     config.parallelism = 2;
-
     return config;
   },
-  // Environment variables for Netlify deployment
   env: {
     NODE_OPTIONS: "--max-old-space-size=4096",
   },
-  // Add Netlify-specific build settings
-  target: "serverless", // Ensure compatibility with Netlify's serverless environment
-  trailingSlash: true, // Add trailing slashes for Netlify routing consistency
+  trailingSlash: true, // Optional: Useful for consistent routing
 };
 
 export default nextConfig;
